@@ -5,14 +5,33 @@
         <script type="text/javascript" src="pomodoro.js"></script>
     </head>
     <body>
-        <h1>pomodoro.js</h1>
-        <p id="intervalType">Press 'start' when ready!</p>
-        <p id="timerDisplay">25:00</p>
-        <p id="rounds">5/5</p>
-
-        <div id="controlButtons">
-            <button id="startBtn" type="button" onclick="pomInput('Start')">Start</button>
-            <button id="startBtn" type="button" onclick="pomInput('Stop')">Stop</button>
+        <div id="durationButtons">
+            <p>Work length</p>
+            <button id="workUpBtn" type="button" onclick="durationInput('workUp')">^</button>
+            <p id="workLength">25</p>
+            <button id="workDownBtn" type="button" onclick="durationInput('workDown')">v</button>
+            
+            <p>Break length</p>
+            <button id="breakUpBtn" type="button" onclick="durationInput('breakUp')">^</button>
+            <p id="breakLength">5</p>
+            <button id="breakDwnBtn" type="button" onclick="durationInput('breakDown')">v</button>
         </div>
+
+        <div id="pomodoroDisplay">
+                <p id="intervalType">Pomodoro.js</p>
+                <p id="timerDisplay">25:00</p>
+                <p id="rounds">5/5</p>   
+                <button id="startBtn" type="button" onclick="controlInput('start')">Start</button>
+                <button id="stopBtn" type="button" onclick="controlInput('stop')">Stop</button>
+        </div>
+        
+        <div id="intervalButtons">
+                <p>Intervals</p>
+                <button id="intervalUpBtn" type="button" onclick="durationInput('intervalUp')">^</button>
+                <p id="intervalsLength">5</p>
+                <button id="intervalDownBtn" type="button" onclick="durationInput('intervalDown')">v</button>
+        </div>
+
+
     </body>
 </html>

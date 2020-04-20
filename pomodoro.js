@@ -3,29 +3,60 @@ Simple pomodoro timer. Homework from The Odin Project.
 Do what you want with it. Disclaimer: It does not count completely accurately. -jitsedefault
 */
 
+// Counter variables
 let seconds = 0;
-let minutes = 25; // How long should the work time be
+let minutes = 2; 
 let currentRound = 1;
-let breakLength = 5;
-let maxRounds = 5; // How many rounds of work minutes
 
 let intervalType = "Work!";
+let counter = false;
 
-let counter;
+// Length variables
+let intervals = 5; // Rounds of work
+let breakLength = 5; // Break length in minutes
+let workLength = 25; // Work length in minutes
 
-// Takes input and acts accordingly
-function pomInput(button){
+// Control buttons for the timer. Pause/start etc.
+function controlInput(button){
     switch (button){
-        case "Start":
+        case "start":
             counter = setInterval(countdown, 1000);
+            break;
     }
+}
+// Adjusts duration of work, breaks etc.
+function durationInput(button){
+    if (counter == false){
+        switch (button){
+            case "workUp":
+                workLength += 1;
+                break;
+            case "workDown":
+                workLength -= 1;
+                break;
+            case "breakUp":
+                breakLength += 1;
+                break;
+            case "breakDown":
+                breakLength -= 1;
+                break;
+            case "intervalUp":
+                intervals += 1;
+                break;
+            case "intervalDown":
+                intervals -= 1;
+                break;
+        }
+    }
+    updateTimer();
 }
 
 // Counts down a custom interval, alternates breaks etc.
 function countdown(){
     seconds -= 1;
-    if (currentRound == maxRounds){ // If entire sequence is finished, stop counter
+    if (currentRound == intervals){ // If entire sequence is finished, stop counter
         clearInterval(counter);
+        alert("You're done!");
     }
     else if (seconds <= 0 && minutes != 0){ // Count down minutes
         minutes -= 1;
@@ -33,27 +64,38 @@ function countdown(){
     }
     else if (seconds == 0 && minutes == 0 && intervalType == "Work!"){ // Relax
         currentRound += 1;
-        minutes = 5;
+        minutes = breakLength;
+        intervalType = "Take a break.";
         document.title = intervalType; 
     }
     else if (seconds == 0 && minutes == 0 && intervalType == "Take a break."){ // Start working again
-        minutes = 25;
+        minutes = workLength;
+        intervalType = "Work!";
         document.title = intervalType; 
     }
-    updateDisplay();
+    updateTimer();
 }
 
-function updateDisplay(){
-    if (currentRound == maxRounds){ // If entire sequence is finished, stop counter
-        intervalType = "Well done. You finished all the rounds!";
-        document.getElementById("timerDisplay").innerHTML = "0:00";
-        alert("You're done!");
+// Updates the timer UI
+function updateTimer(){
+    // If counter is not active
+    if (counter == false){ 
+        document.getElementById("workLength").innerHTML = workLength;
+        document.getElementById("timerDisplay").innerHTML = workLength + ":00";
+        document.getElementById("breakLength").innerHTML = breakLength;
+        document.getElementById("intervalsLength").innerHTML = intervals;
     }
-    else {
-        document.getElementById("timerDisplay").innerHTML = minutes + ":" + seconds;
-        document.title = intervalType + " - " + minutes + ":" + seconds;
+    // If counter is active
+    else { 
+        if (currentRound == intervals){ // If entire sequence is finished, stop counter
+            intervalType = "Well done. You finished all the rounds!";
+            document.getElementById("timerDisplay").innerHTML = "0:00";
+        }
+        else {
+            document.getElementById("timerDisplay").innerHTML = minutes + ":" + seconds;
+            document.title = intervalType + " - " + minutes + ":" + seconds;
+        }
+        document.getElementById("intervalType").innerHTML = intervalType;
+        document.getElementById("rounds").innerHTML = "Round:" + currentRound + "/" + intervals;  
     }
-    document.getElementById("intervalType").innerHTML = intervalType;
-    document.getElementById("rounds").innerHTML = "Round:" + currentRound + "/" + maxRounds;
-    
 }
