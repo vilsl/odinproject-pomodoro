@@ -5,7 +5,7 @@ Do what you want with it. Disclaimer: It does not count completely accurately. -
 
 // Counter variables
 let seconds = 0;
-let minutes = 2; 
+let minutes = 25; 
 let currentRound = 1;
 
 let intervalType = "Work!";
@@ -22,6 +22,13 @@ function controlInput(button){
         case "start":
             counter = setInterval(countdown, 1000);
             break;
+        case "pause":
+            clearInterval(counter);
+            break;
+        case "reset":
+            resetTimer();
+            updateTimer()
+            break;
     }
 }
 // Adjusts duration of work, breaks etc.
@@ -30,9 +37,12 @@ function durationInput(button){
         switch (button){
             case "workUp":
                 workLength += 1;
+                minutes = workLength;
+                document.getElementById("timerDisplay").innerHTML = "0:00"
                 break;
             case "workDown":
                 workLength -= 1;
+                minutes = workLength;
                 break;
             case "breakUp":
                 breakLength += 1;
@@ -60,7 +70,7 @@ function countdown(){
     }
     else if (seconds <= 0 && minutes != 0){ // Count down minutes
         minutes -= 1;
-        seconds = 5; 
+        seconds = 59; 
     }
     else if (seconds == 0 && minutes == 0 && intervalType == "Work!"){ // Relax
         currentRound += 1;
@@ -96,6 +106,20 @@ function updateTimer(){
             document.title = intervalType + " - " + minutes + ":" + seconds;
         }
         document.getElementById("intervalType").innerHTML = intervalType;
-        document.getElementById("rounds").innerHTML = "Round:" + currentRound + "/" + intervals;  
+        document.getElementById("rounds").innerHTML = "Round: " + currentRound + " / " + intervals;  
     }
+}
+
+// Resets everything
+function resetTimer(){
+    clearInterval(counter);
+    seconds = 0;
+    minutes = 25; 
+    currentRound = 1;
+    intervalType = "Work!";
+    counter = false;
+    intervals = 5; 
+    breakLength = 5; 
+    workLength = 25; 
+    document.getElementById("intervalType").innerHTML = "pomodoro.js";
 }
