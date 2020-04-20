@@ -1,0 +1,86 @@
+/*
+Simple pomodoro timer. Homework from The Odin Project. Do what you want with it. 
+Disclaimer: It does not count completely accurately. -jitsedefault
+*/
+
+* {
+    font-family: arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.content {
+    max-width: 500px;
+    margin: 100px auto;
+}
+
+#pomodoroDisplay {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 24px;
+}
+
+#pomodoroDisplay p {
+    margin-top: 10px;
+}
+
+#timerDisplay {
+    font-size: 45px;
+}
+
+#rounds {
+    font-size: 18px;
+}
+
+#playbackControls {
+    margin-top: 15px;
+}
+
+#playbackControls button {
+    display: inline;
+    margin: 0 10px;
+}
+
+.playbackButton {
+    background-color: #ebebeb;
+    border-radius: 5px;
+    border: none;
+    width: 120px;
+    height: 30px;
+    text-align: center;
+}
+
+#controlTitles {
+    height: 20px;
+    margin: 40px auto 10px auto;
+    text-align: center;
+}
+
+#controlTitles p {
+    display: inline;
+    margin: 0 50px;
+    color: #5d5d5d;
+}
+
+#durationControls {
+    text-align: center;
+}
+
+#durationControls p {
+    display: inline;
+    color: #5d5d5d;
+}
+
+#durationControls button {
+    margin: 0 18px;
+}
+
+.durationButton {
+    background-color: #ebebeb;
+    border-radius: 5px;
+    border: none;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    font-size: 18px;
+}

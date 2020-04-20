@@ -1,6 +1,6 @@
 /*
-Simple pomodoro timer. Homework from The Odin Project. 
-Do what you want with it. Disclaimer: It does not count completely accurately. -jitsedefault
+Simple pomodoro timer. Homework from The Odin Project. Do what you want with it. 
+Disclaimer: It does not count completely accurately. -jitsedefault
 */
 
 // Counter variables
@@ -16,7 +16,7 @@ let intervals = 5; // Rounds of work
 let breakLength = 5; // Break length in minutes
 let workLength = 25; // Work length in minutes
 
-// Control buttons for the timer. Pause/start etc.
+// Control buttons for the timer. Pause/start/reset
 function controlInput(button){
     switch (button){
         case "start":
@@ -28,10 +28,9 @@ function controlInput(button){
         case "reset":
             resetTimer();
             updateTimer()
-            break;
     }
 }
-// Adjusts duration of work, breaks etc.
+// Adjusts duration of work, breaks, intervals
 function durationInput(button){
     if (counter == false){
         switch (button){
@@ -55,13 +54,12 @@ function durationInput(button){
                 break;
             case "intervalDown":
                 intervals -= 1;
-                break;
         }
     }
     updateTimer();
 }
 
-// Counts down a custom interval, alternates breaks etc.
+// Counts down for x intervals, alternates breaks
 function countdown(){
     seconds -= 1;
     if (currentRound == intervals){ // If entire sequence is finished, stop counter
@@ -72,7 +70,7 @@ function countdown(){
         minutes -= 1;
         seconds = 59; 
     }
-    else if (seconds == 0 && minutes == 0 && intervalType == "Work!"){ // Relax
+    else if (seconds == 0 && minutes == 0 && intervalType == "Work!"){ // Break time
         currentRound += 1;
         minutes = breakLength;
         intervalType = "Take a break.";
@@ -101,10 +99,10 @@ function updateTimer(){
             intervalType = "Well done. You finished all the rounds!";
             document.getElementById("timerDisplay").innerHTML = "0:00";
         }
-        else {
+        else { // Timer
             document.getElementById("timerDisplay").innerHTML = minutes + ":" + seconds;
             document.title = intervalType + " - " + minutes + ":" + seconds;
-        }
+        } // Work status and round
         document.getElementById("intervalType").innerHTML = intervalType;
         document.getElementById("rounds").innerHTML = "Round: " + currentRound + " / " + intervals;  
     }
@@ -122,4 +120,5 @@ function resetTimer(){
     breakLength = 5; 
     workLength = 25; 
     document.getElementById("intervalType").innerHTML = "pomodoro.js";
+    document.title = "pomodoro.js";
 }
