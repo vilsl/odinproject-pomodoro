@@ -45,7 +45,7 @@ function notifyUser(message){
 function controlInput(button){
     switch (button){
         case "start":
-            if (minutes > 0){
+            if (minutes > 0 && counter == false){
                 minutes -= 1;
             }
             counter = setInterval(countdown, 1000);
@@ -105,14 +105,14 @@ function countdown(){
     if (currentRound == intervals && minutes == 0 && seconds == 0){ 
         clearInterval(counter);
     }
-    else if (seconds == 0 && intervalType == "Work!"){ // Break time
+    else if (seconds == 0 && minutes == 0 && intervalType == "Work!"){ // Break time
         currentRound += 1;
         minutes = breakLength;
         intervalType = "Take a break.";
         document.title = intervalType; 
         notifyUser("Take a break.");
     }
-    else if (seconds == 0 && intervalType == "Take a break."){ // Start working again
+    else if (seconds == 0 && minutes == 0 && intervalType == "Take a break."){ // Start working again
         minutes = workLength;
         intervalType = "Work!";
         document.title = intervalType; 
