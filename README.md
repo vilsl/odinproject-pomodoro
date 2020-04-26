@@ -1,2 +1,9 @@
-# odinproject-pomodoro
-An implementation of a Pomodoro timer, from the Web Dev 101 course.
+# pomodoro.js
+A simple online pomodoro timer that let's the user customize intervals and duration. Supports desktop notifications for break time and work time. Originally homework from [The Odin Project](https://www.theodinproject.com/courses/web-development-101/lessons/pairing-project). 
+
+## How to use it
+The timer can be found online [here](https://vilsl.github.io/odinproject-pomodoro/).
+
+## Built with
+Just standard Javascript.
+
