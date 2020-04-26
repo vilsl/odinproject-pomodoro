@@ -7,3 +7,5 @@ The timer can be found online [here](https://vilsl.github.io/odinproject-pomodor
 ## Built with
 Just standard Javascript.
 
+## Disclaimer
+It is not completely accurate, and likely has more than a few undiscovered bugs. I wouldn't recommend using it as your primary timer.
