@@ -16,6 +16,31 @@ let intervals = 5; // Rounds of work
 let breakLength = 5; // Break length in minutes
 let workLength = 25; // Work length in minutes
 
+// Ask for notification permissions
+if (!window.notification){
+
+}
+else {
+    Notification.requestPermission(); // Request permission for notifications
+}
+
+// Issue alerts to the user for intervals
+function notifyUser(message){
+    if (!window.notification){ // Check for browser support
+        return;
+    }
+    else {
+        // Check if notifications have been granted
+        if (Notification.permission === 'granted'){
+            let notify = new Notification(message);
+        }
+        else {
+            return;
+        }
+    }
+}
+
+
 // Control buttons for the timer. Pause/start/reset
 function controlInput(button){
     switch (button){
@@ -65,17 +90,20 @@ function countdown(){
     if (currentRound == intervals){ // If entire sequence is finished, stop counter
         clearInterval(counter);
         alert("You're done!");
+        notifyUser("Well done. You finished all the rounds!");
     }
     else if (seconds == 0 && intervalType == "Work!"){ // Break time
         currentRound += 1;
         minutes = breakLength;
         intervalType = "Take a break.";
         document.title = intervalType; 
+        notifyUser("Take a break.");
     }
     else if (seconds == 0 && intervalType == "Take a break."){ // Start working again
         minutes = workLength;
         intervalType = "Work!";
         document.title = intervalType; 
+        notifyUser("Time to work!");
     }
     else if (seconds <= 0 && minutes != 0){ // Count down minutes
         minutes -= 1;
