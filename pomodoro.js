@@ -17,21 +17,23 @@ let breakLength = 5; // Break length in minutes
 let workLength = 25; // Work length in minutes
 
 // Ask for notification permissions
-if (!window.notification){
 
-}
-else {
-    Notification.requestPermission(); // Request permission for notifications
-}
+document.addEventListener('DOMContentLoaded', function() {
+    if (!("Notification" in window)) {
+        return;
+    }
+    else if (Notification.permission !== "granted")
+        Notification.requestPermission();
+   });
 
 // Issue alerts to the user for intervals
 function notifyUser(message){
-    if (!window.notification){ // Check for browser support
+    if (!("Notification" in window)) {
         return;
     }
     else {
         // Check if notifications have been granted
-        if (Notification.permission === 'granted'){
+        if (Notification.permission === "granted"){
             let notify = new Notification(message);
         }
         else {
