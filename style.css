@@ -1,18 +1,25 @@
 /*
 Simple pomodoro timer. Homework from The Odin Project. Do what you want with it. 
-Disclaimer: It does not count completely accurately. -jitsedefault
+Disclaimer: It does not count completely accurately. -vilsl
 */
 
 * {
-    font-family: arial, sans-serif;
+    font-family: helvetica, sans-serif, arial;
     margin: 0;
     padding: 0;
 }
 
-.content {
-    max-width: 500px;
-    margin: 100px auto;
+body { 
+    background-color: #121212;
+    color: #ffffff;
 }
+
+.content {
+    width: 390px;
+    margin: 15% auto;
+}
+
+/* Display for timer */
 
 #pomodoroDisplay {
     margin-top: 10px;
@@ -25,62 +32,76 @@ Disclaimer: It does not count completely accurately. -jitsedefault
 }
 
 #timerDisplay {
-    font-size: 45px;
+    font-size: 72px;
 }
 
 #rounds {
     font-size: 18px;
 }
 
+/* Playback controls for timer */
+
 #playbackControls {
-    margin-top: 15px;
+    margin-top: 30px;
 }
 
 #playbackControls button {
-    display: inline;
-    margin: 0 10px;
+    margin: 0 20px;
 }
 
 .playbackButton {
-    background-color: #ebebeb;
+    background-color: #BB86FC;
+    color: #000000;
+    font-size: 16px;
     border-radius: 5px;
     border: none;
-    width: 120px;
-    height: 30px;
+    width: 80px;
+    height: 50px;
+}
+
+.playbackButton:hover {
+    background-color: #BB86FC;
+    cursor: grabbing;
+}
+
+/* Controls to adjust duration */
+
+#durationContainer {
+    width: 100%;
+    margin-top: 30px;
     text-align: center;
 }
 
-#controlTitles {
-    height: 20px;
-    margin: 40px auto 10px auto;
-    text-align: center;
-}
-
-#controlTitles p {
+#durationContainer p {
     display: inline;
-    margin: 0 50px;
-    color: #5d5d5d;
 }
 
-#durationControls {
-    text-align: center;
+.metaControls {
+    width: 100px;
+    display: inline-block;
+    margin: 0 10px;
+    line-height: 25px;
 }
 
-#durationControls p {
-    display: inline;
-    color: #5d5d5d;
-}
-
-#durationControls button {
-    margin: 0 18px;
+.metaButtons {
+    margin-top: 10px;
 }
 
 .durationButton {
-    background-color: #ebebeb;
+    background-color: #03DAC6;
+    font-weight: bold;
+    font-family: arial;
     border-radius: 5px;
     border: none;
-    width: 30px;
-    height: 30px;
-    text-align: center;
+    width: 25px;
+    height: 25px;
     font-size: 18px;
+}
+
+#workDownBtn, #intervalDownBtn, #breakDwnBtn {
+    float: left;
+}
+
+#workUpBtn, #intervalUpBtn, #breakUpBtn {
+    float: right;
 }

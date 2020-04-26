@@ -1,10 +1,10 @@
 /*
 Simple pomodoro timer. Homework from The Odin Project. Do what you want with it. 
-Disclaimer: It does not count completely accurately. -jitsedefault
+Disclaimer: It does not count completely accurately. -vilsl
 */
 
 // Counter variables
-let seconds = 0;
+let seconds = 60;
 let minutes = 25; 
 let currentRound = 1;
 
@@ -37,7 +37,7 @@ function durationInput(button){
             case "workUp":
                 workLength += 1;
                 minutes = workLength;
-                document.getElementById("timerDisplay").innerHTML = "0:00"
+                document.getElementById("timerDisplay").innerHTML = "00:00"
                 break;
             case "workDown":
                 workLength -= 1;
@@ -66,20 +66,20 @@ function countdown(){
         clearInterval(counter);
         alert("You're done!");
     }
-    else if (seconds <= 0 && minutes != 0){ // Count down minutes
-        minutes -= 1;
-        seconds = 59; 
-    }
-    else if (seconds == 0 && minutes == 0 && intervalType == "Work!"){ // Break time
+    else if (seconds == 0 && intervalType == "Work!"){ // Break time
         currentRound += 1;
         minutes = breakLength;
         intervalType = "Take a break.";
         document.title = intervalType; 
     }
-    else if (seconds == 0 && minutes == 0 && intervalType == "Take a break."){ // Start working again
+    else if (seconds == 0 && intervalType == "Take a break."){ // Start working again
         minutes = workLength;
         intervalType = "Work!";
         document.title = intervalType; 
+    }
+    else if (seconds <= 0 && minutes != 0){ // Count down minutes
+        minutes -= 1;
+        seconds = 60; 
     }
     updateTimer();
 }
@@ -88,24 +88,70 @@ function countdown(){
 function updateTimer(){
     // If counter is not active
     if (counter == false){ 
+        if (workLength < 10){ // Add leading 0 if needed
+            document.getElementById("timerDisplay").innerHTML = "0" + workLength + ":00";
+        }
+        else {
+            document.getElementById("timerDisplay").innerHTML = workLength + ":00";
+        }
         document.getElementById("workLength").innerHTML = workLength;
-        document.getElementById("timerDisplay").innerHTML = workLength + ":00";
         document.getElementById("breakLength").innerHTML = breakLength;
         document.getElementById("intervalsLength").innerHTML = intervals;
     }
     // If counter is active
     else { 
+        let display = "";
+        let titleDisplay ="";
         if (currentRound == intervals){ // If entire sequence is finished, stop counter
             intervalType = "Well done. You finished all the rounds!";
-            document.getElementById("timerDisplay").innerHTML = "0:00";
+            document.getElementById("timerDisplay").innerHTML = "00:00";
         }
-        else { // Timer
-            document.getElementById("timerDisplay").innerHTML = minutes + ":" + seconds;
-            document.title = intervalType + " - " + minutes + ":" + seconds;
-        } // Work status and round
+        else if (seconds == 60){ // Make it 23:00 instead of jumping straight to 22:59
+            if (minutes < 10){ // Leading 0 for minutes if necessary
+                display = "0" + (minutes+1) + ":" + "00";
+            }
+            else {
+                display = (minutes+1) + ":" + "00";
+            }
+        }
+        else { // Check if leading 0 is necessary
+            if (minutes < 10){ // Add leading 0 if needed for minutes and/or seconds
+                if (seconds < 10){
+                   display = addLeadingZero(display,3);
+                }
+                else {
+                    display = addLeadingZero(display,0);
+                }
+            }
+            else if (seconds < 10) { // Add leading 0 if necessary for seconds only
+                display = addLeadingZero(display,1);
+            }
+            else { // No leading 0 necessary
+                display = minutes + ":" + seconds;
+            }
+        } 
+        // Update display and tab title
+        document.getElementById("timerDisplay").innerHTML = display;
+        document.title = intervalType + " - " + display;
+        
+        // Update work status and  current round
         document.getElementById("intervalType").innerHTML = intervalType;
         document.getElementById("rounds").innerHTML = "Round: " + currentRound + " / " + intervals;  
     }
+}
+
+// Adds a leading zero for minute or seconds or both
+function addLeadingZero(display, minuteorseconds){
+    if (minuteorseconds == 0){ // return leading minute
+        display = "0" + minutes + ":" + seconds;
+    }
+    else if (minuteorseconds == 1){ // return leading seconds
+        display = minutes + ":" + "0" + seconds;
+    }
+    else if (minuteorseconds == 3) { // return leading minute and seconds
+        display = "0" + minutes + ":" + "0" + seconds;
+    }
+    return display;
 }
 
 // Resets everything

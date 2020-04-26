@@ -1,6 +1,6 @@
 <!--
 Simple pomodoro timer. Homework from The Odin Project. Do what you want with it. 
-Disclaimer: It does not count completely accurately. -jitsedefault
+Disclaimer: It does not count completely accurately. -vilsl
 -->
 
 <!DOCTYPE html>
@@ -23,24 +23,31 @@ Disclaimer: It does not count completely accurately. -jitsedefault
                         </div>
                 </div>
 
-                <div id="controlTitles">
-                    <p>Work</p>
-                    <p>Rounds</p>
-                    <p>Break</p>
-                </div>
-
-                <div id="durationControls">
-                    <button id="workDownBtn" class="durationButton" type="button" onclick="durationInput('workDown')">-</button>
-                    <p id="workLength">25</p>
-                    <button id="workUpBtn" class="durationButton" type="button" onclick="durationInput('workUp')">+</button>
-
-                    <button id="intervalDownBtn" class="durationButton" type="button" onclick="durationInput('intervalDown')">-</button>
-                    <p id="intervalsLength">5</p>
-                    <button id="intervalUpBtn" class="durationButton" type="button" onclick="durationInput('intervalUp')">+</button>
-
-                    <button id="breakDwnBtn" class="durationButton" type="button" onclick="durationInput('breakDown')">-</button>
-                    <p id="breakLength">5</p>
-                    <button id="breakUpBtn" class="durationButton" type="button" onclick="durationInput('breakUp')">+</button>
+                <div id="durationContainer">
+                    <div class="metaControls">
+                        <p>Work</p><br>
+                        <div class="metaButtons">
+                                <button id="workDownBtn" class="durationButton" type="button" onclick="durationInput('workDown')">-</button>
+                                <p id="workLength">25</p>
+                                <button id="workUpBtn" class="durationButton" type="button" onclick="durationInput('workUp')">+</button>
+                        </div>
+                    </div>
+                    <div class="metaControls">
+                        <p>Rounds</p><br>
+                        <div class="metaButtons">
+                            <button id="intervalDownBtn" class="durationButton" type="button" onclick="durationInput('intervalDown')">-</button>
+                            <p id="intervalsLength">5</p>
+                            <button id="intervalUpBtn" class="durationButton" type="button" onclick="durationInput('intervalUp')">+</button> 
+                        </div> 
+                    </div>
+                    <div class="metaControls">
+                        <p>Break</p><br>
+                        <div class="metaButtons">
+                            <button id="breakDwnBtn" class="durationButton" type="button" onclick="durationInput('breakDown')">-</button>
+                            <p id="breakLength">5</p>
+                            <button id="breakUpBtn" class="durationButton" type="button" onclick="durationInput('breakUp')">+</button>
+                        </div>
+                    </div>
                 </div>
     </body>
 </html>
