@@ -202,7 +202,7 @@ function addLeadingZero(display, minuteorseconds){
 // Resets everything
 function resetTimer(){
     clearInterval(counter);
-    seconds = 0;
+    seconds = 60;
     minutes = 25; 
     currentRound = 1;
     intervalType = "Work!";
