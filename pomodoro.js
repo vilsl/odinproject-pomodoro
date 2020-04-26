@@ -10,6 +10,7 @@ let currentRound = 1;
 
 let intervalType = "Work!";
 let counter = false;
+let finished = false;
 
 // Length variables
 let intervals = 5 // Rounds of work
@@ -101,16 +102,18 @@ function durationInput(button){
 // Counts down for x intervals, alternates breaks
 function countdown(){
     seconds -= 1;
-    // If entire sequence is finished, stop counter
-    if (currentRound == intervals && minutes == 0 && seconds == 0){ 
-        clearInterval(counter);
-    }
-    else if (seconds == 0 && minutes == 0 && intervalType == "Work!"){ // Break time
-        currentRound += 1;
-        minutes = breakLength;
-        intervalType = "Take a break.";
-        document.title = intervalType; 
-        notifyUser("Take a break.");
+    // If entire sequence is finished, stop counter, otherwise carry on.
+    if (seconds == 0 && minutes == 0 && intervalType == "Work!"){ // Break time
+        if (currentRound == intervals){ 
+            finished = true;
+            clearInterval(counter);
+        }
+        else {currentRound += 1;
+            minutes = breakLength;
+            intervalType = "Take a break.";
+            document.title = intervalType; 
+            notifyUser("Take a break.");
+        }
     }
     else if (seconds == 0 && minutes == 0 && intervalType == "Take a break."){ // Start working again
         minutes = workLength;
@@ -127,8 +130,15 @@ function countdown(){
 
 // Updates the timer UI
 function updateTimer(){
+    // If entire sequence is finished
+    if (finished == true){
+        document.getElementById("timerDisplay").innerHTML = "00:00";
+        document.getElementById("intervalType").innerHTML = "All finished. Well done!";
+        document.title = "Finsihed!";
+        notifyUser("Well done. You finished all the rounds!");
+    }
     // If counter is not active
-    if (counter == false){ 
+    else if (counter == false){ 
         if (workLength < 10){ // Add leading 0 if needed
             document.getElementById("timerDisplay").innerHTML = "0" + workLength + ":00";
         }
@@ -138,17 +148,12 @@ function updateTimer(){
         document.getElementById("workLength").innerHTML = workLength;
         document.getElementById("breakLength").innerHTML = breakLength;
         document.getElementById("intervalsLength").innerHTML = intervals;
+        document.getElementById("rounds").innerHTML = "Round: " + "0" + " / " + intervals;
     }
     // If counter is active
     else { 
         let display = "";
-        // If entire sequence is finished, stop counter
-        if (currentRound == intervals && minutes == 0 && seconds == 0){ 
-            intervalType = "Well done. You finished all the rounds!";
-            document.getElementById("timerDisplay").innerHTML = "00:00";
-            notifyUser("Well done. You finished all the rounds!");
-        }
-        else if (seconds == 60){ // Make it 23:00 instead of jumping straight to 22:59
+        if (seconds == 60){ // Make it 23:00 instead of jumping straight to 22:59
             if (minutes < 10){ // Leading 0 for minutes if necessary
                 display = "0" + (minutes+1) + ":" + "00";
             }
@@ -207,6 +212,7 @@ function resetTimer(){
     currentRound = 1;
     intervalType = "Work!";
     counter = false;
+    finished = false;
     intervals = 5; 
     breakLength = 5; 
     workLength = 25; 
