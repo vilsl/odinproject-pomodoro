@@ -2,7 +2,7 @@
 A simple online pomodoro timer that lets the user customize intervals and duration. Supports desktop notifications for break time and work time. Originally homework from [The Odin Project](https://www.theodinproject.com/courses/web-development-101/lessons/pairing-project). 
 
 ## How to use it
-The timer can be found online [here](https://vilsl.github.io/odinproject-pomodoro/).
+The timer can be found online [here](https://vilsl.github.io/pomodorojs/).
 
 ## Built with
 Just standard Javascript.
