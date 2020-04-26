@@ -69,6 +69,9 @@ function durationInput(button){
                 document.getElementById("timerDisplay").innerHTML = "00:00"
                 break;
             case "workDown":
+                if (workLength <= 1){
+                    break;
+                }
                 workLength -= 1;
                 minutes = workLength;
                 break;
@@ -76,13 +79,20 @@ function durationInput(button){
                 breakLength += 1;
                 break;
             case "breakDown":
+                if (breakLength <= 1){
+                    break;
+                }
                 breakLength -= 1;
                 break;
             case "intervalUp":
                 intervals += 1;
                 break;
             case "intervalDown":
+                if (intervals <= 1){
+                    break;
+                }
                 intervals -= 1;
+                break;
         }
     }
     updateTimer();
